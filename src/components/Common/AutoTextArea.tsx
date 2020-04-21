@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import TextareaAutosize from 'react-textarea-autosize';
-import {device} from '../../styles/MediaHoc';
 
 const AutoSizeTextArea = styled(TextareaAutosize)`
         overflow:hidden;
@@ -53,9 +52,10 @@ interface StyledProps {
 interface TextAreaProps extends StyledProps {
   Ref?:React.MutableRefObject<any>;
   placeholder?:string;
+  onkeydown?:(event:React.KeyboardEvent<HTMLTextAreaElement>) => void;
     
 }
-const AutoTextArea = ({Ref,placeholder,width,fontSize,leftmargin,color}:TextAreaProps) => {
+const AutoTextArea = ({Ref,placeholder,width,fontSize,leftmargin,color, onkeydown}:TextAreaProps) => {
 
 
 
@@ -66,6 +66,7 @@ const AutoTextArea = ({Ref,placeholder,width,fontSize,leftmargin,color}:TextArea
                 placeholder={placeholder}
                 inputRef={Ref}
                 color={color}
+                onKeyDown={onkeydown}
             />
 }
 

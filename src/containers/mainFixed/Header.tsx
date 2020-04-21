@@ -1,5 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import ThemeToggle from '../../components/Header/ThemeToggle';
+import SignInBtn from '../../components/Header/SignInBtn';
+import NavContainer from './NavContainer';
 import {useSelector,useDispatch} from 'react-redux';
 import {change} from '../../modules/theme';
 import { RootState } from '../../modules';
@@ -32,7 +34,9 @@ const Header = () => {
     
     return (
         <HeaderBlock style={{zIndex:999}}>
-            <ThemeToggle onChangeTheme={onChangeTheme} isChange={isChange} active={mode}/>
+          <SignInBtn />
+          <NavContainer/>
+          <ThemeToggle onChangeTheme={onChangeTheme} isChange={isChange} active={mode}/>
         </HeaderBlock>
     )
 }

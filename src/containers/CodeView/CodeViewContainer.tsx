@@ -64,7 +64,7 @@ const CodeViewContainer = () => {
     //코드메모 삭제
     const onrRemoveCode = useCallback((name,number) => {
         dispatch(removememo(name,number))
-    },[])
+    },[dispatch])
 
     //코드메모 저장
     const onSaveMemo = useCallback(() => {
@@ -79,7 +79,10 @@ const CodeViewContainer = () => {
                 codeRef.current.focus();
                 return;
             }
-            return dispatch(addmemo(name,titleRef.current.value,contentRef.current.value,codeRef.current.value));
+            dispatch(addmemo(name,titleRef.current.value,contentRef.current.value,codeRef.current.value));
+            titleRef.current.value='';
+            codeRef.current.value='';
+            contentRef.current.value='';
         }
     },[location,dispatch])
 

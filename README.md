@@ -1,11 +1,10 @@
 # CODE MEMO 
 
 > 코드 기록,공유, 리뷰 (code highlight 지원)
-> didn't connection server
 
 Screenshots
 ===============
-(http://www.sheawong.com/wp-content/uploads/2013/08/keephatin.gif) 
+![alt text](https://sublogs3.s3.ap-northeast-2.amazonaws.com/original/ezgif.com-crop.gif) 
 
 ## Project stack
 

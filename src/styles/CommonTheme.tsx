@@ -43,7 +43,7 @@ export const lightTheme = {
         sideCodeViewBgcolor:'rgb(21, 21, 21)',
     },
     palette: {
-        lightPurple: "rgb(238, 136, 238)",
+        lightPurple: "rgb(170, 170, 255)",
         purple:"#60f",
         basic: "rgb(17, 17, 17)",
         lightBasic: "rgb(102, 102, 102)"
