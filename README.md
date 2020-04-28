@@ -4,11 +4,7 @@
 
 Screenshots
 ===============
-<<<<<<< HEAD
-![alt text](https://sublogs3.s3.ap-northeast-2.amazonaws.com/original/ezgif.com-crop.gif) 
-=======
-![Screenshots](https://sublogs3.s3.ap-northeast-2.amazonaws.com/original/ezgif.com-crop.gif) 
->>>>>>> 9e1c96d7b79f379be1e2b70cf769af5010eaa7b4
+![Screenshots](https://sublogs3.s3.ap-northeast-2.amazonaws.com/original/ezgif.com-crop.gif)
 
 ## Project stack
 
