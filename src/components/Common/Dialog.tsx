@@ -3,6 +3,7 @@ import {useState,useEffect} from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import {CustomBtn} from './CustomButton';
 
+
 const fadeIn = keyframes`
   from {
     opacity: 0
@@ -59,10 +60,12 @@ const DarkBackground = styled.div`
 `
 
 const DialogBlock = styled.div`
-    width:320px;
+    width:600px;
     padding:1.5rem;
-    background-color:white;
+    overflow:hidden;
+    background:white;
     border-radius:2px;
+    transition:height .3s;
     h3 {
         margin: 0;
         font-size: 1.5rem;
@@ -82,6 +85,10 @@ const DialogBlock = styled.div`
     `}
 `
 
+const ContentBlock = styled.div`
+  width:550px;
+  margin:0 auto;
+`
 const ButtonGroup = styled.div`
     margin-top:3rem;
     display:flex;
@@ -94,21 +101,22 @@ const ShortMaginBtn = styled(CustomBtn)`
 `
 
 interface ChildProps {
-    children:string;
-    title:string;
-    confirmtext:string;
+    height?: number;
+    children:string | React.ReactNode;
+    title:string | React.ReactNode;
     cancelText:string;
+    confirmText:string;
     visible:boolean;
-    onConfirm: () => void;
     onCancel: () => void;
+    onConfirm: () => void;
     disappear?: boolean;
 }
 type styleProps = {
     disappear?: boolean;
 }
 
-function Dialog({title, children, confirmtext,cancelText, visible ,onConfirm, onCancel}:ChildProps) {
-
+function Dialog({height, title, children,confirmText, onConfirm, cancelText, visible , onCancel}:ChildProps) {
+  
     const [animate, setAnimate] = useState(false);
     const [localVisible, setLocalVisible] = useState(false);
     
@@ -124,14 +132,16 @@ function Dialog({title, children, confirmtext,cancelText, visible ,onConfirm, on
   if (!animate && !localVisible) return null;
     return (
         <>
-           <DarkBackground disappear={!visible}>
-               <DialogBlock disappear={!visible}>
-                    <h3>{title}</h3>
-                    <p>{children}</p>
+           <DarkBackground disappear={!visible} onClick={onCancel}>
+               <DialogBlock style={{height: height ? height+210 : 'auto'}} disappear={!visible} onClick={(e) => e.stopPropagation()}>
+                 <ContentBlock>
+                    {title}
+                    {children}
                     <ButtonGroup>
-                        <ShortMaginBtn color="gray" onClick={onConfirm}>{confirmtext}</ShortMaginBtn>
-                        <ShortMaginBtn color="pink" onClick={onCancel}>{cancelText}</ShortMaginBtn>
+                      <ShortMaginBtn color="pink" onClick={onConfirm}>{confirmText}</ShortMaginBtn>
+                      <ShortMaginBtn color="pink" onClick={onCancel}>{cancelText}</ShortMaginBtn>
                     </ButtonGroup>
+                  </ContentBlock>
                </DialogBlock>
            </DarkBackground>
         </>
@@ -139,7 +149,7 @@ function Dialog({title, children, confirmtext,cancelText, visible ,onConfirm, on
 }
 
 Dialog.defaultProps = {
-    confirmText: '확인',
+    confirmText:'확인',
     cancelText: '취소',
     visible: false
   };

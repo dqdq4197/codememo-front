@@ -1,6 +1,7 @@
-import React from 'react';
+import React,{useState} from 'react';
 import styled,{keyframes,css} from 'styled-components';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {Link} from 'react-router-dom';
 import {Input} from '../Common/Input';
 import {CodeMemoType} from '../../modules/codememo';
@@ -98,6 +99,7 @@ const Item = styled.div`
     position:relative;
     display:flex;
     align-items:center;
+    justify-content: space-between;
     width:80%;
     height:50px;
     background:${({theme}) => theme.codeView.sideItembgcolor};
@@ -106,6 +108,51 @@ const Item = styled.div`
     margin:10px auto 5px;
     padding-left:20px;
     cursor:pointer;
+    .postName {
+        max-width: 200px;
+        max-height:40px;
+        text-overflow: ellipsis;
+        word-break: break-all;
+        white-space: nowrap;
+    }
+    .setPost {
+        height:24px;
+        .icon {
+            &:hover {
+                background:rgba(255,255,255,.3);
+                border-radius:35%;
+                transition:.3s;
+            }
+        }
+        .selectBox {
+            position:absolute;
+            display:none;
+            width:120px;
+            height:auto;
+            background:white;
+            right:24px;
+            top:0;
+            border-radius:10px;
+            padding:10px;
+            font-size:.9rem;
+            ul {
+                li {
+                    color:black;
+                    border-radius:5px;
+                    &:hover {
+                        background:rgba(0,0,0,.2);
+                    }
+                    margin-bottom:5px;
+                }
+
+            }
+        }
+    }
+    #${(props:dropdownProps) => 'name'+props.isSet.num} {
+        .selectBox {
+            display:${props => props.isSet.is ? 'block' : 'none'};
+        }
+    }
     &:after {
         left: 0;
         position: absolute;
@@ -116,6 +163,8 @@ const Item = styled.div`
         background:${({theme}) => theme.codeView.sideItemAfter};
     }
     transition: .2s;
+    
+    
 `
 const ItemListBlock = styled.div`
     display:flex;
@@ -125,7 +174,13 @@ type StyledProps = {
     isShow:{
         isShow:boolean;
         isAni:boolean;
-    };
+    },
+}
+type dropdownProps = {
+    isSet: {
+        num:number;
+        is:boolean,
+    }
 }
 
 type ItemProps = {
@@ -140,11 +195,35 @@ type ItemProps = {
 }
 
 const SideItemBar = ({addItem,isAddItem,addInput,onEnterAddItem,memoArray}:ItemProps) => {
+    const [isSet, SetIsSet] = useState({num:1,is:false});
+
+
+    const onSetting = (event:React.MouseEvent<HTMLSpanElement, MouseEvent>,index:number) => {
+        event.preventDefault()
+        if(isSet.num === index) {
+            SetIsSet({num:index, is:!isSet.is});
+        } else {
+            SetIsSet({num:index, is:true});
+        }
+    }
     
     const itemList: React.ReactElement[] =memoArray.filter((item,index) => memoArray.findIndex(i => i.name === item.name) === index ).map(
-        item => (
+        (item,index) => (
             <Link to={`/codeview/${item.name}`} key={item.name}>
-              <Item >{item.name}</Item>
+              <Item isSet={isSet}>
+                <span className="postName">{item.name}</span>
+                <span id={'name'+index} className="setPost" onClick={(e)=>onSetting(e,index)}>
+                    <MoreVertIcon className="icon"/>
+                    <div className="selectBox">
+                        <ul>
+                            <li>수정</li>
+                            <li>삭제</li>
+                            <li>공유</li>
+                            <li>비공개</li>
+                        </ul>
+                    </div>
+                </span>
+              </Item>
             </Link>
         )
     );

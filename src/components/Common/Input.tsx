@@ -23,6 +23,7 @@ export const Input = styled.input.attrs(props => ({
     background:${props => props.bgcolor || 'transparent'};
     margin: ${props => props.margin || '0rem'};
     padding: ${props => props.padding};
+    padding-left:${props =>props.paddingLeft};
     transition: background .2s;
     height:${props => props.height || '1rem'};
   `;

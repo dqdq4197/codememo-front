@@ -45,10 +45,8 @@ const ContentBlock = styled.div`
             }
         }
     }
-    .content {
-        font-size:15px;
+    p {
         font-weight:500;
-        white-space: break-spaces;
     }
 `
 
@@ -167,7 +165,7 @@ const CodeList = ({memoArray, onRemoveMemo}:ListProps) => {
                         </div>
                         <div>
                             <h2>{value.about.title}</h2>
-                            {value.about.content ? <pre className="content">{value.about.content}</pre> : null}
+                            {value.about.content ? <p>{value.about.content}</p> : null}
                         </div>
                     </ContentBlock>
                     <CodeBlock>

@@ -119,18 +119,7 @@ type CodeEditorProps = {
     onRemoveMemo:(name:string,number:number) =>void;
 }
 
-
-
 const CodeEditor = ({onPreView,memoArray,codeRef,isShow,onSave,titleRef,contentRef,onRemoveMemo}:CodeEditorProps) => {
-
-    const textAreaTab = (event:React.KeyboardEvent<HTMLTextAreaElement>) => {
-        if(event.keyCode===9){
-            event.preventDefault();
-            var v=codeRef.current.value,s=codeRef.current.selectionStart,e=codeRef.current.selectionEnd;
-            codeRef.current.value=v.substring(0, s)+'\t'+v.substring(e);
-            codeRef.current.selectionStart=codeRef.current.selectionEnd=s+1;
-        }
-    }
     return (
         <EditorBlock>
             <div style={{paddingRight:"80px"}}>
@@ -141,7 +130,7 @@ const CodeEditor = ({onPreView,memoArray,codeRef,isShow,onSave,titleRef,contentR
                         <AutoTextArea Ref={contentRef} placeholder="CONTENT" fontSize="16px" leftmargin="1rem"/>
                     </CodeContent>
                     <CodeEditBlock isShow={isShow}>
-                        <AutoTextArea Ref={codeRef} color={'white'} placeholder={'코드를 입력해보세요!'} onkeydown={textAreaTab}/>
+                        <AutoTextArea Ref={codeRef} color={'white'} placeholder={'코드를 입력해보세요!'}/>
                         <CodeNote id='code' isShow={isShow} style={{color:'white'}}/>
                     </CodeEditBlock>
                 </CodeBlock>
